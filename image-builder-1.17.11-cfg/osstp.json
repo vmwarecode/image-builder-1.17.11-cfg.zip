@@ -1,0 +1,4 @@
+{
+    "custom_role": "true",
+    "custom_role_names": "./ansible_customize"
+}

@@ -1,0 +1,19 @@
+---
+- name: Ensure fs.file-max is set
+  sysctl:
+    name: fs.file-max
+    value: "96000"
+    state: present
+    sysctl_set: yes
+    reload: yes
+
+#TODO (trhoden) This is should be replaced with lineinfile
+# Aslo, this should probably be a drop-in in /etc/security/limits.d instead
+- name: Enforce soft and hard limit for open files in system
+  shell: echo '*  - nofile  32768' >> /etc/security/limits.conf
+
+- name: Enforce session required
+  shell: echo 'session required pam_limits.so' >> /etc/pam.d/common-session
+  when: ansible_os_family == "Debian"
+
+- import_tasks: osstp.yml
