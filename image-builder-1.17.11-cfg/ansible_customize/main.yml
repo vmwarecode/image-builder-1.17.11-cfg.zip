@@ -15,5 +15,3 @@
 - name: Enforce session required
   shell: echo 'session required pam_limits.so' >> /etc/pam.d/common-session
   when: ansible_os_family == "Debian"
-
-- import_tasks: osstp.yml
